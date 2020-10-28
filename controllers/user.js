@@ -74,12 +74,23 @@ exports.getAll = (req, res) => {
 }
 exports.getOne = (req, res) => {
     UserModel.find()
-    .then( (users) => {res.send(users) } )
+    .then( (user) => {res.send(user) } )
     .catch(
         (error) => {
             res.status(500).send({message: error.message})
         }
     )
 
+}
+exports.deleteOne = (req, res) => {
+    UserModel.findByIdAndRemove(req.params.id)
+        .then((user) => { res.send(user) })
+        .catch(
+            (error) => {
+                res.status(500).send({
+                    message: error.message
+                })
+            }
+        )
 }
 
