@@ -43,3 +43,15 @@ exports.getAll = (req,res) => {
         }
     )
 } 
+exports.getOne = (req, res) => {
+    GenreModel.findById(req.params.id)
+    .populate('genre')
+    .then( (genre) => { req.send(genre) })
+    .catch(
+        (error) =>{
+            res.status(500).send({
+                message: error.message
+            })
+        }
+    )
+} 
